@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'overlay.dart';
+import 'overlay_builder.dart';
 
 class OverlayFullscreen extends StatelessWidget {
   final Key? _overlayKey;
@@ -21,7 +21,7 @@ class OverlayFullscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OverlayImpl(
+    return OverlayBuilder(
       key: _overlayKey,
       builder: onBuild,
       child: child,

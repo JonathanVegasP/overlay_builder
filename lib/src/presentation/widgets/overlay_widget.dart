@@ -1,18 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'overlay.dart';
-
-enum OverlayAlignment {
-  topCenter,
-  topLeft,
-  topRight,
-  center,
-  centerLeft,
-  centerRight,
-  bottomCenter,
-  bottomLeft,
-  bottomRight,
-}
+import '../../data/enums/overlay_alignment.dart';
+import 'overlay_builder.dart';
 
 class OverlayWidget extends StatelessWidget {
   final Key? _overlayKey;
@@ -37,8 +26,15 @@ class OverlayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, viewPort) {
-      return OverlayImpl(
+      return OverlayBuilder(
         key: _overlayKey,
+        args: [
+          alignment,
+          verticalSpacing,
+          horizontalSpacing,
+          viewPort.maxHeight,
+          viewPort.maxWidth
+        ],
         child: child,
         initialShow: initialShow,
         maintainState: maintainState,

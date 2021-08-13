@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-import '../widgets/overlay.dart';
+import '../widgets/overlay_builder.dart';
 
-mixin OverlayWidgetStateMixin<T extends OverlayImpl> on State<T> {
+mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
   OverlayEntry? _overlayEntry;
   late final _state = Overlay.of(context)!;
 
@@ -43,10 +43,27 @@ mixin OverlayWidgetStateMixin<T extends OverlayImpl> on State<T> {
 
   @override
   void didUpdateWidget(covariant oldWidget) {
-    if (oldWidget.builder != widget.builder && isShowing) {
+    void update() {
       remove();
 
       Future.microtask(show);
+    }
+
+    if ((widget.args != null) & (oldWidget.args != null)) {
+      final args = widget.args!;
+      final oldArgs = oldWidget.args!;
+      final length = args.length;
+
+      if (length != oldArgs.length) {
+        update();
+      } else {
+        for (var i = 0; i < length; i++) {
+          if (args[i] != oldArgs[i]) {
+            update();
+            break;
+          }
+        }
+      }
     }
 
     super.didUpdateWidget(oldWidget);
