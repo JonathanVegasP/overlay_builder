@@ -41,32 +41,32 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
     }
   }
 
-  @override
-  void didUpdateWidget(covariant oldWidget) {
-    void update() {
-      remove();
+ @override
+  void didUpdateWidget(covariant T oldWidget) {
+   void update() {
+     remove();
 
-      Future.microtask(show);
-    }
+     Future.microtask(show);
+   }
 
-    if ((widget.args != null) & (oldWidget.args != null)) {
-      final args = widget.args!;
-      final oldArgs = oldWidget.args!;
-      final length = args.length;
+   if ((widget.args != null) & (oldWidget.args != null)) {
+     final args = widget.args!;
+     final oldArgs = oldWidget.args!;
+     final length = args.length;
 
-      if (length != oldArgs.length) {
-        update();
-      } else {
-        for (var i = 0; i < length; i++) {
-          if (args[i] != oldArgs[i]) {
-            update();
-            break;
-          }
-        }
-      }
-    }
+     if (length != oldArgs.length) {
+       update();
+     } else {
+       for (var i = 0; i < length; i++) {
+         if (args[i] != oldArgs[i]) {
+           update();
+           break;
+         }
+       }
+     }
+   }
 
-    super.didUpdateWidget(oldWidget);
+   super.didUpdateWidget(oldWidget);
   }
 
   @override
