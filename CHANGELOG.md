@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Added Readme.MD
+
 ## 0.4.0
 
 * Added DartDocs to OverlayAlignment

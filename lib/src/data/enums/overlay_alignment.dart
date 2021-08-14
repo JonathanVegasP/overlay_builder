@@ -21,9 +21,9 @@ enum OverlayAlignment {
   /// The center point along the bottom edge.
   bottomCenter,
 
-  /// The bottom left corner
+  /// The bottom left corner.
   bottomLeft,
 
-  /// The bottom right corner
+  /// The bottom right corner.
   bottomRight,
 }
