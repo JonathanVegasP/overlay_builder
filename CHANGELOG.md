@@ -1,3 +1,9 @@
+## 0.3.0
+
+* Added DartDocs
+
+* Added Description
+
 ## 0.2.0
 
 * Added more optimization for some properties to rebuild the overlay when necessary

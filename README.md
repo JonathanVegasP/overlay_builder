@@ -1,6 +1,4 @@
-# overlay_builder
-
-Overlay Builder
+# Overlay Builder
 
 ## Getting Started
 

@@ -6,9 +6,18 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
   OverlayEntry? _overlayEntry;
   late final _state = Overlay.of(context)!;
 
+  /// [isShowing] is used to known when the overlay is
+  /// showing
   bool get isShowing => _overlayEntry != null;
 
+  /// [show] is used to show the
+  /// [OverlayBuilder.overlayChild] widget overlaying its screen or child
   void show() {
+    assert(
+      !isShowing,
+      'Cannot show an overlay widget when it is already showing',
+    );
+
     _overlayEntry = OverlayEntry(
       builder: widget.builder,
       maintainState: widget.maintainState,
@@ -18,12 +27,17 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
     _state.insert(_overlayEntry!);
   }
 
+  /// [remove] is used to remove the
+  /// [OverlayBuilder.overlayChild] widget when it is overlaying its screen or
+  /// child
   void remove() {
     _overlayEntry?.remove();
 
     _overlayEntry = null;
   }
 
+  /// [toggle] is used to show or remove the
+  /// [OverlayBuilder.overlayChild] widget
   void toggle() {
     if (isShowing) {
       remove();
