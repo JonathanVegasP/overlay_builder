@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Fixed an issue showing the overlay when it shouldn't appear when changing some properties
+
 ## 0.3.0
 
 * Added DartDocs
