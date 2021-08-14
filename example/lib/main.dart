@@ -8,9 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Overlay Builder Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const MyHomePage(),
     );
   }
@@ -52,9 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             OverlayWidget(
               key: _overlayWidget,
-              child: const Text(
-                'Overlay Builder Demo',
-              ),
+              child: const Text('Overlay Builder Demo'),
               overlayChild: const Material(
                 type: MaterialType.transparency,
                 child: CircularProgressIndicator(),
