@@ -47,17 +47,14 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
       Future.microtask(show);
     }
 
-    if (oldWidget.overlayChild != widget.overlayChild) {
+    if ((oldWidget.overlayChild != widget.overlayChild) |
+        (oldWidget.alignment != widget.alignment)) {
       update();
-    } else if (oldWidget.alignment != widget.alignment) {
+    } else if ((oldWidget.verticalSpacing != widget.verticalSpacing) |
+        (oldWidget.horizontalSpacing != widget.horizontalSpacing)) {
       update();
-    } else if (oldWidget.verticalSpacing != widget.verticalSpacing) {
-      update();
-    } else if (oldWidget.horizontalSpacing != widget.horizontalSpacing) {
-      update();
-    } else if (oldWidget.height != widget.height) {
-      update();
-    } else if (oldWidget.width != widget.width) {
+    } else if ((oldWidget.height != widget.height) |
+        (oldWidget.width != widget.width)) {
       update();
     }
 
