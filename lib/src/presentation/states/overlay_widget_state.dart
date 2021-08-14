@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../mixins/overlay_widget_state_mixin.dart';
@@ -10,6 +11,7 @@ class OverlayWidgetState extends State<OverlayBuilder>
     with OverlayWidgetStateMixin {
   @override
   Widget build(BuildContext context) {
+    Alignment.topCenter
     return widget.child;
   }
 }
