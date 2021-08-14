@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Added DartDocs to OverlayAlignment
+
 ## 0.3.1
 
 * Fixed an issue showing the overlay when it shouldn't appear when changing some properties
