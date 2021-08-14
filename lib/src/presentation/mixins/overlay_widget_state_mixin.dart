@@ -47,24 +47,34 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
       Future.microtask(show);
     }
 
-    if ((widget.args != null) & (oldWidget.args != null)) {
-      final args = widget.args!;
-      final oldArgs = oldWidget.args!;
-      final length = args.length;
-
-      if (length != oldArgs.length) {
-        update();
-      } else {
-        for (var i = 0; i < length; i++) {
-          if (args[i] != oldArgs[i]) {
-            update();
-            break;
-          }
-        }
-      }
+    if (oldWidget.overlayChild != widget.overlayChild) {
+      update();
+    } else if (oldWidget.alignment != widget.alignment) {
+      update();
+    } else if (oldWidget.verticalSpacing != widget.verticalSpacing) {
+      update();
+    } else if (oldWidget.horizontalSpacing != widget.horizontalSpacing) {
+      update();
+    } else if (oldWidget.height != widget.height) {
+      update();
+    } else if (oldWidget.width != widget.width) {
+      update();
     }
 
     super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void reassemble() {
+    assert(() {
+      remove();
+
+      Future.microtask(show);
+
+      return true;
+    }());
+
+    super.reassemble();
   }
 
   @override

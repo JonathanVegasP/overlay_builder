@@ -28,17 +28,16 @@ class OverlayWidget extends StatelessWidget {
     return LayoutBuilder(builder: (context, viewPort) {
       return OverlayBuilder(
         key: _overlayKey,
-        args: [
-          alignment,
-          verticalSpacing,
-          horizontalSpacing,
-          viewPort.maxHeight,
-          viewPort.maxWidth
-        ],
+        overlayChild: overlayChild,
         child: child,
         initialShow: initialShow,
         maintainState: maintainState,
         opaque: opaque,
+        alignment: alignment,
+        verticalSpacing: verticalSpacing,
+        horizontalSpacing: horizontalSpacing,
+        height: viewPort.maxHeight,
+        width: viewPort.maxWidth,
         builder: (overlayContext) {
           final box = context.findRenderObject() as RenderBox;
 

@@ -24,6 +24,7 @@ class OverlayFullscreen extends StatelessWidget {
     return OverlayBuilder(
       key: _overlayKey,
       builder: onBuild,
+      overlayChild: overlayChild,
       child: child,
       initialShow: initialShow,
       maintainState: maintainState,
