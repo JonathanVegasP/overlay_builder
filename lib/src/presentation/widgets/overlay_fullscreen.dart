@@ -53,13 +53,11 @@ class OverlayFullscreen extends StatelessWidget {
   })  : _overlayKey = key,
         super(key: null);
 
-  Widget _onBuild(_) => Positioned.fill(child: overlayChild);
-
   @override
   Widget build(BuildContext context) {
     return OverlayBuilder(
       key: _overlayKey,
-      builder: _onBuild,
+      builder: (context) => Positioned.fill(child: overlayChild),
       overlayChild: overlayChild,
       child: child,
       initialShow: initialShow,
