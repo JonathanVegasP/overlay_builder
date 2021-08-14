@@ -61,7 +61,8 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
       Future.microtask(show);
     }
 
-    if ((oldWidget.overlayChild != widget.overlayChild) |
+    if (!isShowing) {
+    } else if ((oldWidget.overlayChild != widget.overlayChild) |
         (oldWidget.alignment != widget.alignment)) {
       update();
     } else if ((oldWidget.verticalSpacing != widget.verticalSpacing) |

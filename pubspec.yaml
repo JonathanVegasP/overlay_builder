@@ -1,6 +1,6 @@
 name: overlay_builder
 description: Overlay Builder is used to build overlays using declarative programming
-version: 0.3.0
+version: 0.3.1
 homepage: https://vegasdevelopments.com
 repository: https://github.com/JonathanVegasP/overlay_builder
 issue_tracker: https://github.com/JonathanVegasP/overlay_builder/issues
