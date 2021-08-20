@@ -15,12 +15,15 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
   /// [constraints] is used internally.
   @protected
   set constraints(BoxConstraints constraints) {
-    if (_constraints == null) {
-    } else if ((_constraints!.maxWidth != constraints.maxWidth) |
-        (_constraints!.maxHeight != constraints.maxHeight)) {
-      remove();
+    if (_constraints != null) {
+      final _constraints = this._constraints!;
 
-      WidgetsBinding.instance!.addPostFrameCallback(show);
+      if ((_constraints.maxWidth != constraints.maxWidth) |
+          (_constraints.maxHeight != constraints.maxHeight)) {
+        remove();
+
+        WidgetsBinding.instance!.addPostFrameCallback(show);
+      }
     }
 
     _constraints = constraints;
@@ -37,13 +40,13 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
       'Cannot show an overlay widget when it is already showing.',
     );
 
-    _overlayEntry = OverlayEntry(
+    final overlay = _overlayEntry = OverlayEntry(
       builder: _builder,
       maintainState: widget.maintainState,
       opaque: widget.opaque,
     );
 
-    _state.insert(_overlayEntry!);
+    _state.insert(overlay);
   }
 
   /// [remove] is used to remove the [OverlayBuilder.overlayChild] widget when
@@ -111,12 +114,13 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
               child: widget.overlayChild,
             );
 
-            if (_constraints!.hasBoundedHeight &
-                _constraints!.hasBoundedWidth) {
+            final _constraints = this._constraints!;
+
+            if (_constraints.hasBoundedHeight & _constraints.hasBoundedWidth) {
               child = ConstrainedBox(
                 constraints: BoxConstraints.tightFor(
-                  width: _constraints!.maxWidth,
-                  height: _constraints!.maxHeight,
+                  width: _constraints.maxWidth,
+                  height: _constraints.maxHeight,
                 ),
                 child: child,
               );
