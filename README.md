@@ -1,6 +1,6 @@
 # Overlay Builder
 
-Build overlays using declarative programming
+Build overlays using declarative programming.
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ Add this line to your package's pubspec.yaml and run `flutter pub/packages get`
 
 ```
 dependencies:
-    overlay_builder: ^1.0.0
+    overlay_builder: ^1.1.0
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ In your Dart code, you can use:
 import 'package:overlay_builder/overlay_builder.dart';
 ```
 
-To use **OverlayWidget** or **OverlayFullscreen**, you'll need a child anywhere to be rendered in the widget tree as below:
+To use the **OverlayBuilder**, you'll need a child anywhere to be rendered in the widget tree as below:
 
 ```dart
 @override
@@ -38,16 +38,12 @@ Widget build(BuildContext context) {
 }
 ```
 
-Then only wrap the current child using **OverlayWidget** or **OverlayFullscreen** as below:
-
-* OverlayWidget
-
-Will render the **overlayChild** based on its child
+Then only wrap the current child using **OverlayBuilder** as below:
 
 ```dart
 @override
 Widget build(BuildContext context) {
-  return OverlayWidget(
+  return OverlayBuilder(
 	child: const Text('Overlay Builder Demo'),
 	overlayChild: const Material(
 	  type: MaterialType.transparency,
@@ -57,30 +53,18 @@ Widget build(BuildContext context) {
 }
 ```
 
-* OverlayFullscreen
-
-Will render the **overlayChild** on the entire screen
+To render the overlay widget overlaying the entire screen is needed to declare the OverlayType as below:
 
 ```dart
 @override
 Widget build(BuildContext context) {
-  return OverlayFullscreen(
+  return OverlayBuilder(
+    type: OverlayType.fullscreen,
 	child: const Text('Overlay Builder Demo'),
-	overlayChild: Material(
+	overlayChild: const Material(
 	  type: MaterialType.transparency,
-	  child: ColoredBox(
-		color: Colors.black54,
-		child: Column(
-		  children: const [
-			Text('Loading...'),
-			SizedBox(height: 8),
-			CircularProgressIndicator(
-			  valueColor: AlwaysStoppedAnimation(Colors.black),
-			),
-		  ],
-		),
-	  ),
-	)
+	  child: Center(child: Text('Overlay Test')),
+	),
   );
 }
 ```
@@ -98,22 +82,10 @@ OverlayWidgetState get overlayController {
 
 Put the key in an **OverlayBuilder** widget as below:
 
-* OverlayWidget
-
 ```dart
 @override
 Widget build(BuildContext context) {
-  return OverlayWidget(
-	key: _overlay,
-	...
-```
-
-* OverlayFullscreen
-
-```dart
-@override
-Widget build(BuildContext context) {
-  return OverlayFullscreen(
+  return OverlayBuilder(
 	key: _overlay,
 	...
 ```
@@ -138,42 +110,29 @@ void doSomething() {
 
 ## APIS
 
-The Overlay Builder has many apis to build layout with custom overlays
+The Overlay Builder has many apis to build the layout with custom overlays.
 
-#### OverlayWidget
+#### OverlayBuilder
 
-Is used to display an overlay widget that overlays its **child**
-
-* Props
-
-| Name | Description | Required |
-| :--: | ----------- | -------- |
-| overlayChild | Is used to get the current overlay widget. When it changes the current overlay will be updated | true |
-| child | Is used to get the current widget that the **OverlayWidget** is wrapping and then display it in the application interface | true |
-| initialShow | When true, then it will build the **overlayChild** on the first frame. Defaults to **false** | false |
-| maintainState | Whether this entry must be included in the tree even if there is a fully **opaque** entry above it. By default, if there is an entirely **opaque** entry over this one, then this one will not be included in the widget tree (in particular, stateful widgets within the overlay entry will not be instantiated). To ensure that your overlay entry is still built even if it is not visible, set **maintainState** to true. This is more expensive, so should be done with care. In particular, if widgets in an overlay entry with **maintainState** set to true repeatedly call **State.setState**, the user's battery will be drained unnecessarily. This is used by the **Navigator** and **Route** objects to ensure that routes are kept around even when in the background, so that **Future**s promised from subsequent routes will be handled properly when they complete. Defaults to **false** | false |
-| opaque | Whether this entry occludes the entire overlay. If an entry claims to be opaque, then, for efficiency, the overlay will skip building entries below that entry unless they have **maintainState** set. Defaults to **false** | false |
-| alignment | Is used to align the **overlayChild** based on its **child**'s constraints. Defaults to **OverlayAlignment.bottomCenter** | false |
-| verticalSpacing | Is used to add padding vertically to its **overlayChild**. Defaults to **0.0**, can be negative | false |
-| horizontalSpacing | Is used to add padding horizontally to its **overlayChild**. Defaults to **0.0**, can be negative | false |
-
-#### OverlayFullscreen
-
-Is used to display an overlay widget that overlays the entire screen
+Is used to display an overlay widget based on its **type**.
 
 * Props
 
 | Name | Description | Required |
 | :--: | ----------- | -------- |
-| overlayChild | Is used to get the current overlay widget. When it changes the current overlay will be updated | true |
-| child | Is used to get the current widget that the **OverlayFullscreen** is wrapping and then display it in the application interface | true |
-| initialShow | When true, then it will build the **overlayChild** on the first frame. Defaults to **false** | false |
-| maintainState | Whether this entry must be included in the tree even if there is a fully **opaque** entry above it. By default, if there is an entirely **opaque** entry over this one, then this one will not be included in the widget tree (in particular, stateful widgets within the overlay entry will not be instantiated). To ensure that your overlay entry is still built even if it is not visible, set **maintainState** to true. This is more expensive, so should be done with care. In particular, if widgets in an overlay entry with **maintainState** set to true repeatedly call **State.setState**, the user's battery will be drained unnecessarily. This is used by the **Navigator** and **Route** objects to ensure that routes are kept around even when in the background, so that **Future**s promised from subsequent routes will be handled properly when they complete. Defaults to **false** | false |
-| opaque | Whether this entry occludes the entire overlay. If an entry claims to be opaque, then, for efficiency, the overlay will skip building entries below that entry unless they have **maintainState** set. Defaults to **false** | false |
+| overlayChild | Is used to get the current overlay widget. When it changes the current overlay will be updated. | true |
+| child | Is used to get the current widget that the **OverlayBuilder** is wrapping and then display it in the application interface. | true |
+| initialShow | When true, then it will build the **overlayChild** on the first frame. Defaults to **false**. | false |
+| maintainState | Whether this entry must be included in the tree even if there is a fully **opaque** entry above it. By default, if there is an entirely **opaque** entry over this one, then this one will not be included in the widget tree (in particular, stateful widgets within the overlay entry will not be instantiated). To ensure that your overlay entry is still built even if it is not visible, set **maintainState** to true. This is more expensive, so should be done with care. In particular, if widgets in an overlay entry with **maintainState** set to true repeatedly call **State.setState**, the user's battery will be drained unnecessarily. This is used by the **Navigator** and **Route** objects to ensure that routes are kept around even when in the background, so that **Future**s promised from subsequent routes will be handled properly when they complete. Defaults to **false**. | false |
+| opaque | Whether this entry occludes the entire overlay. If an entry claims to be opaque, then, for efficiency, the overlay will skip building entries below that entry unless they have **maintainState** set. Defaults to **false**. | false |
+| type | Is used to render the overlay widget based on its type. If it is **OverlayType.fullscreen** then will render an overlay widget that overlays the entire screen, else if it is **OverlayType.positioned** then will render an overlay widget that overlays its child. Defaults to **OverlayType.positioned**. | false |
+| alignment | Is used to align the **overlayChild** based on its **child**'s constraints when **type** is **OverlayType.positioned**. Defaults to **OverlayAlignment.bottomCenter**. | false |
+| verticalSpacing | Is used to add padding vertically to its **overlayChild** when **type** is **OverlayType.positioned**. Defaults to **0.0**, can be negative. | false |
+| horizontalSpacing | Is used to add padding horizontally to its **overlayChild** when **type** is **OverlayType.positioned**. Defaults to **0.0**, can be negative. | false |
 
 #### OverlayAlignment
 
-Is used with **OverlayWidget** to align the overlay widget
+Is used with **OverlayBuilder** to align the overlay widget when its **type** is **OverlayType.positioned**.
 
 * Getters
 
@@ -189,20 +148,35 @@ Is used with **OverlayWidget** to align the overlay widget
 | bottomLeft | The bottom left corner. |
 | bottomRight | The bottom right corner. |
 
-#### OverlayWidgetState
+#### OverlayType
 
-Is used with a **GlobalKey** to get the current **OverlayBuilder**'s state for showing, removing or known when it is showing an overlay widget
-
-* Methods
-
-| Name | Description |
-| :--: | ----------- |
-| show | Is used to show the **OverlayBuilder.overlayChild** widget overlaying its screen or child |
-| remove | Is used to remove the **OverlayBuilder.overlayChild** widget when it is overlaying its screen or child |
-| toggle | Is used to show or remove the **OverlayBuilder.overlayChild** widget |
+Is used to render the overlay based on its type. If it is **OverlayType.fullscreen** then will render an overlay widget that overlays the entire screen, else if it is **OverlayType.positioned** then will render an overlay widget that overlays its child.
 
 * Getters
 
 | Name | Description |
 | :--: | ----------- |
-| isShowing | is used to known when the overlay is showing |
+| fullscreen | Is used to render a fullscreen overlay widget. |
+| positioned | Is used to render a positioned overlay widget based on its child. |
+
+#### OverlayWidgetState
+
+Is used with a **GlobalKey** to get the current **OverlayBuilder**'s state for showing, removing or known when it is showing an overlay widget.
+
+* Methods
+
+| Name | Description |
+| :--: | ----------- |
+| show | Is used to show the **OverlayBuilder.overlayChild** widget overlaying its screen or child. |
+| remove | Is used to remove the **OverlayBuilder.overlayChild** widget when it is overlaying its screen or child. |
+| toggle | Is used to show or remove the **OverlayBuilder.overlayChild** widget. |
+
+* Getters
+
+| Name | Description |
+| :--: | ----------- |
+| isShowing | is used to known when the overlay is showing. |
+
+## Deprecation Notice
+
+For some code optimizations the apis **OverlayWidget** and **OverlayFullscreen** were deprecated. Please use the **OverlayBuilder** instead.

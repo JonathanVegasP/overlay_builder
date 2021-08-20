@@ -1,4 +1,4 @@
-/// [OverlayAlignment] is used with [OverlayWidget] to align the overlay widget
+/// [OverlayAlignment] is used with [OverlayWidget] to align the overlay widget.
 enum OverlayAlignment {
   /// The center point along the top edge.
   topCenter,
@@ -25,5 +25,5 @@ enum OverlayAlignment {
   bottomLeft,
 
   /// The bottom right corner.
-  bottomRight,
+  bottomRight
 }

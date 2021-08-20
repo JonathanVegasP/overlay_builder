@@ -1,22 +1,25 @@
 import 'package:flutter/widgets.dart';
 
+import '../../data/enums/overlay_type.dart';
 import 'overlay_builder.dart';
 
 /// [OverlayFullscreen] is used to display an overlay widget that overlays the
-/// entire screen
+/// entire screen.
+@Deprecated('Use OverlayBuilder with OverlayType.fullscreen instead. It will be'
+    ' removed in the next update.')
 class OverlayFullscreen extends StatelessWidget {
   final Key? _overlayKey;
 
   /// [overlayChild] is used to get the current overlay
-  /// widget. When it changes the current overlay will be updated
+  /// widget. When it changes the current overlay will be updated.
   final Widget overlayChild;
 
   /// [child] is used to get the current widget that the [OverlayFullscreen] is
-  /// wrapping and then display it in the application interface
+  /// wrapping and then display it in the application interface.
   final Widget child;
 
   /// [initialShow] when true, then it will build the [overlayChild] on the
-  /// first frame. Defaults to [false]
+  /// first frame. Defaults to [false].
   final bool initialShow;
 
   /// Whether this entry must be included in the tree even if there is a fully
@@ -33,16 +36,18 @@ class OverlayFullscreen extends StatelessWidget {
   /// This is used by the [Navigator] and [Route] objects to ensure that routes
   /// are kept around even when in the background, so that [Future]s promised
   /// from subsequent routes will be handled properly when they complete.
-  /// Defaults to [false]
+  /// Defaults to [false].
   final bool maintainState;
 
   /// Whether this entry occludes the entire overlay.
   ///
   /// If an entry claims to be opaque, then, for efficiency, the overlay will
   /// skip building entries below that entry unless they have [maintainState]
-  /// set. Defaults to [false]
+  /// set. Defaults to [false].
   final bool opaque;
 
+  /// [OverlayFullscreen] constructor is used to handle the overlay widget that
+  /// overlays the entire screen.
   const OverlayFullscreen({
     Key? key,
     required this.overlayChild,
@@ -57,12 +62,12 @@ class OverlayFullscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return OverlayBuilder(
       key: _overlayKey,
-      builder: (context) => Positioned.fill(child: overlayChild),
       overlayChild: overlayChild,
       child: child,
       initialShow: initialShow,
       maintainState: maintainState,
       opaque: opaque,
+      type: OverlayType.fullscreen,
     );
   }
 }

@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OverlayWidget(
+            OverlayBuilder(
               key: _overlayWidget,
               child: const Text('Overlay Builder Demo'),
               overlayChild: const Material(
@@ -59,8 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: OverlayFullscreen(
+      floatingActionButton: OverlayBuilder(
         key: _overlayFullscreen,
+        type: OverlayType.fullscreen,
         child: FloatingActionButton(
           onPressed: onTap,
           tooltip: 'Show Overlay',
