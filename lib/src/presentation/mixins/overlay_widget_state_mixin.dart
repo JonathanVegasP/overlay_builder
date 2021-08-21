@@ -107,7 +107,9 @@ mixin OverlayWidgetStateMixin<T extends OverlayBuilder> on State<T> {
             }
 
             offset = offset.translate(
-                widget.horizontalSpacing, widget.verticalSpacing);
+              widget.horizontalSpacing,
+              widget.verticalSpacing,
+            );
 
             Widget child = FractionalTranslation(
               translation: const Offset(-0.5, -0.5),

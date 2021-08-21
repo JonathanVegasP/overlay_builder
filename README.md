@@ -132,7 +132,7 @@ Is used to display an overlay widget based on its **type**.
 
 #### OverlayAlignment
 
-Is used with **OverlayBuilder** to align the overlay widget when its **type** is **OverlayType.positioned**.
+Is used with **OverlayBuilder** to align the overlay widget when **OverlayBuilder.type** is **OverlayType.positioned**.
 
 * Getters
 
@@ -150,7 +150,7 @@ Is used with **OverlayBuilder** to align the overlay widget when its **type** is
 
 #### OverlayType
 
-Is used to render the overlay based on its type. If it is **OverlayType.fullscreen** then will render an overlay widget that overlays the entire screen, else if it is **OverlayType.positioned** then will render an overlay widget that overlays its child.
+Is used with **OverlayBuilder** to render the overlay based on its type. If it is **OverlayType.fullscreen** then will render an overlay widget that overlays the entire screen, else if it is **OverlayType.positioned** then will render an overlay widget that overlays its child.
 
 * Getters
 
